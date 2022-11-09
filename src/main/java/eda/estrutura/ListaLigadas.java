@@ -1,23 +1,26 @@
 package eda.estrutura;
 /*
  * Data: 29/Ago/2022
- * Institui��o: USTM
+ * Instituiçãoo: USTM
  * Docente: Godinho Quissico
- * CLASSE GEN�RICA PARA DEFINIR UMA LISTA LIGADA
+ * CLASSE GENÉRICA PARA DEFINIR UMA LISTA LIGADA
  */
 
 
 public class ListaLigadas <T extends Comparable<T>> {
-	private Node <T> head;		//variavel que contere o nó especial para guardar a referê111ncia ao primeiro elemento 
-	private static int size;	//variavel que contere o número de elementos na lista.
+	//variavel que contere o nó especial para guardar a referê111ncia ao primeiro elemento 
+	private Node <T> head;	
+	
+	//variavel que contere o número de elementos na lista.
+	private static int size;	
 	
 	/*Construtor da nossa lista*/
 	public ListaLigadas(){
-		head=new Node<>(); //cria o elemento especial designado head (cabe�a da lista).
+		head=new Node<>(); //cria o elemento especial designado head (cabeça da lista).
 		size=0;	
 	}
 	
-	/*M�todo para fazer a inser��o de elemento na cabe�a da lista*/
+	/*Método para fazer a inserção de elemento na cabeça da lista*/
 	public boolean add(T elem){
 		try{
 			if(isEmpty()){
@@ -32,7 +35,7 @@ public class ListaLigadas <T extends Comparable<T>> {
 		}
 	}
 	
-	/*M�todo para fazer a inser��o em qualque parte da lista*/
+	/*Método para fazer a inserção em qualque parte da lista*/
 	public boolean add(T elem, int pos){
 		try{
 			if(pos<=size+1 || pos >= 1){
@@ -62,12 +65,12 @@ public class ListaLigadas <T extends Comparable<T>> {
 		}
 	}
 	
-	/*M�todo que retorna o n�mero de elementos contidos na lista*/
+	/*Método que retorna o número de elementos contidos na lista*/
 	public int getSize(){
 		return size;
 	}
 	
-	/*M�todo que verifica se a lista � vazia*/
+	/*Metodo que verifica se a lista esta vazia*/
 	public boolean isEmpty(){
 		return head.getNext() == null;
 	}
@@ -78,13 +81,13 @@ public class ListaLigadas <T extends Comparable<T>> {
 		size=0;
 	}
 	
-	/*M�todo que verifica se um determinado elemento existe na lista*/
+	/*Metodo que verifica se um determinado elemento existe na lista*/
 	public boolean exists(T elem){
 		return Search(elem)!=null;
 	}
 	
 	
-	/*M�todo que retorna o n� que cont�m o elemento passado por par�metro*/
+	/*Metodo que retorna o nó que contém o elemento passado por parámetro*/
 	private Node<T> Search(T elem){
 		try{
 			Node<T> aux = List();
@@ -99,11 +102,12 @@ public class ListaLigadas <T extends Comparable<T>> {
 		}
 	}
 	
+	/*Metodo que retorna a lista de nó que conté elementos*/
 	public Node<T> List(){
 		return head.getNext();
 	}
 	
-	/*M�todo que retorna uma string com todos os elementos na ordem de inser��o*/
+	/*Metodo que retorna uma string com todos os elementos na ordem de inserção*/
 	public String toString(){
 		try{
 			StringBuilder str = new StringBuilder();
@@ -119,7 +123,7 @@ public class ListaLigadas <T extends Comparable<T>> {
 		}
 	}
 	
-	/*M�todo que remove da lista um determinado elemento recebido por par�metro*/
+	/*Metodo que remove da lista um determinado elemento recebido por parámetro*/
 	public boolean remove(T elem){
 		try{			
 			Node <T> toRemove=Search(elem);
@@ -145,7 +149,7 @@ public class ListaLigadas <T extends Comparable<T>> {
 		}
 	}
 	
-	/*M�todo que remove um elemento de uma determinada posi��o da lista*/
+	/*Metodo que remove um elemento de uma determinada posição da lista*/
 	public boolean remove(int pos){
 		try{
 			
@@ -176,7 +180,7 @@ public class ListaLigadas <T extends Comparable<T>> {
 	}
 	
 	
-	/*M�todo que retorna o n� que cont�m o elemento passado por par�metro*/
+	/*Metodo que retorna o nó que contém o elemento de uma determinada posição por par�metro*/
 	public Node<T> get(int pos){
 		try{
 			

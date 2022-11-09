@@ -5,7 +5,10 @@ import eda.estrutura.Node;
 
 public class Curso implements Comparable<Curso>{
 
+	/*Variável para armazenar o nome do curso*/
 	private String nome;
+	
+	// Variávelpara armazenar a lista de plano curriculares
 	private ListaLigadas<PlanoCurricular> planosCurriculares = new ListaLigadas<PlanoCurricular>();
 	
 	public String getNome() {
@@ -24,11 +27,12 @@ public class Curso implements Comparable<Curso>{
 		this.planosCurriculares = planosCurriculares;
 	}
 	
-	
+	/*Metodo que permitir adicionar plano curricular*/
 	public void adicionarPlanoCurricular(PlanoCurricular pc) {
 		this.planosCurriculares.add(pc);
 	}
 	
+	/*Metodo que retorna a lista de descrições dos plano curriculares*/
 	public ListaLigadas<String> descricoesDoPlano(){
 		ListaLigadas<String> descricoes = new ListaLigadas<String>();
 		Node<PlanoCurricular> aux = planosCurriculares.List();

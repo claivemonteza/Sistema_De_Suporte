@@ -5,7 +5,10 @@ import eda.estrutura.Node;
 
 public class Disciplina implements Comparable<Disciplina> {
 
+	/*Variável para armazenar o nome da disciplina*/
 	private String nome;
+	
+	// Variávelpara armazenar a lista de topicos
 	private ListaLigadas<String> topicos = new ListaLigadas<String>();
 
 	public String getNome() {
@@ -24,10 +27,12 @@ public class Disciplina implements Comparable<Disciplina> {
 		this.topicos = topicos;
 	}
 
+	/*Metodo que permite adicionar topico*/
 	public void adicionarTopico(String topico) {
 		this.topicos.add(topico);
 	}
 
+	/*Metodo que permite remover o topico numa determinada posição*/
 	public void removerTopico(int index) {
 		this.topicos.remove(index - 1);
 	}
@@ -37,6 +42,7 @@ public class Disciplina implements Comparable<Disciplina> {
 		return "Disciplina: " + nome + "\n" + "            Topicos: \n" + topicos() + "\n";
 	}
 
+	/*Metodo que retorna os topicos em formato string*/
 	private String topicos() {
 		String listaFormatada = "";
 		Node<String> aux = this.topicos.List();

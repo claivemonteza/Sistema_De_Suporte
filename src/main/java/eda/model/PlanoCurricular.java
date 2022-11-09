@@ -4,10 +4,11 @@ import eda.estrutura.ListaLigadas;
 import eda.estrutura.Node;
 
 public class PlanoCurricular implements Comparable<PlanoCurricular>{
-
+	/*Variável para armazenar o descrição do plano curricular*/
 	private String descricao;
+	// Variávelpara armazenar a lista de disciplinas
 	private ListaLigadas<Disciplina> disciplinas = new ListaLigadas<Disciplina>();
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -22,6 +23,7 @@ public class PlanoCurricular implements Comparable<PlanoCurricular>{
 		this.disciplinas = disciplinas;
 	}
 	
+	/*Metodo que retorna a lista de descrições das disciplinas do plano curricular*/
 	public ListaLigadas<String> nomesDeDisciplinas(){
 		ListaLigadas<String> nomes = new ListaLigadas<String>();
 		Node<Disciplina> aux = disciplinas.List();
@@ -32,10 +34,12 @@ public class PlanoCurricular implements Comparable<PlanoCurricular>{
 		return nomes;
 	}
 	
+	/*Metodo que adicionar disciplinas no plano curricular*/
 	public void adicionarDisciplina(Disciplina disciplina) {
 		this.disciplinas.add(disciplina);
 	}
 	
+	/*Metodo que remover a disciplina de uma determinada posição*/
 	public void removerDisciplina(int index) {
 		this.disciplinas.remove(index);
 	}
