@@ -1,11 +1,10 @@
 package eda.view;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import eda.controller.DisciplinaDao;
 import eda.controller.PlanoCurricularDao;
+import eda.estrutura.ListaLigadas;
 import eda.model.Disciplina;
 import eda.model.PlanoCurricular;
 import eda.util.Componentes;
@@ -84,8 +83,7 @@ public class PlanoMenu {
 	private void listaDePlanosCurriculares() {
 		try {
 			if (!this.planoCurricularDao.lista().isEmpty()) {
-				List<String> descricoes = this.planoCurricularDao.lista().stream().map(p -> p.getDescricao())
-						.collect(Collectors.toList());
+				ListaLigadas<String> descricoes = this.planoCurricularDao.descricoes();
 				System.out.println("********** LISTA DE PLANOS CURRICULARES **********\n"
 						+ Componentes.listaFormatada(descricoes) + "0 - Voltar\n" + "Selecione a Plano: ");
 				int opcao = sc.nextInt();
@@ -147,7 +145,7 @@ public class PlanoMenu {
 	public PlanoCurricular gravarPlano() {
 		System.out.print("********** CRIAR PLANO CURRICULAR **********\n" + "Descrição: ");
 		String descricao = sc.next();
-		if (this.planoCurricularDao.pesquisar(descricao) != null) {
+		if (this.planoCurricularDao.pesquisar(descricao)) {
 			System.out.println("Já existe um plano curricular com essa descrição");
 		} else {
 			PlanoCurricular pc = new PlanoCurricular();
@@ -183,8 +181,7 @@ public class PlanoMenu {
 
 	private void removerDisciplinaNoPlano(PlanoCurricular planoCurricular) {
 		try {
-			List<String> nomes = planoCurricular.getDisciplinas().stream().map(p -> p.getNome())
-					.collect(Collectors.toList());
+			ListaLigadas<String> nomes = planoCurricular.nomesDeDisciplinas();
 			System.out.println("********** REMOVER DISCIPLINA **********\n" + Componentes.listaFormatada(nomes)
 					+ "0 - Voltar\n" + "Selecione a disciplina: ");
 			int opcao = sc.nextInt();
@@ -200,9 +197,8 @@ public class PlanoMenu {
 	}
 
 	public PlanoCurricular selecionarPlano(String titulo) {
-		List<String> nomes = planoCurricularDao.lista().stream().map(p -> p.getDescricao())
-				.collect(Collectors.toList());
-		System.out.println("********** " + titulo + " **********\n" + Componentes.listaFormatada(nomes) + "0 - Voltar\n"
+		ListaLigadas<String> descricoes = planoCurricularDao.descricoes();
+		System.out.println("********** " + titulo + " **********\n" + Componentes.listaFormatada(descricoes) + "0 - Voltar\n"
 				+ "Selecione o plano: ");
 		int opcao = sc.nextInt();
 		if (opcao != 0) {

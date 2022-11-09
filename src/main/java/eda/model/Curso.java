@@ -1,12 +1,12 @@
 package eda.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import eda.estrutura.ListaLigadas;
+import eda.estrutura.Node;
 
-public class Curso {
+public class Curso implements Comparable<Curso>{
 
 	private String nome;
-	private List<PlanoCurricular> planosCurriculares = new ArrayList<>();
+	private ListaLigadas<PlanoCurricular> planosCurriculares = new ListaLigadas<PlanoCurricular>();
 	
 	public String getNome() {
 		return nome;
@@ -16,11 +16,11 @@ public class Curso {
 		this.nome = nome;
 	}
 
-	public List<PlanoCurricular> getPlanosCurriculares() {
+	public ListaLigadas<PlanoCurricular> getPlanosCurriculares() {
 		return planosCurriculares;
 	}
 
-	public void setPlanosCurriculares(List<PlanoCurricular> planosCurriculares) {
+	public void setPlanosCurriculares(ListaLigadas<PlanoCurricular> planosCurriculares) {
 		this.planosCurriculares = planosCurriculares;
 	}
 	
@@ -29,9 +29,24 @@ public class Curso {
 		this.planosCurriculares.add(pc);
 	}
 	
+	public ListaLigadas<String> descricoesDoPlano(){
+		ListaLigadas<String> descricoes = new ListaLigadas<String>();
+		Node<PlanoCurricular> aux = planosCurriculares.List();
+		while(aux!=null) {
+			descricoes.add(aux.getData().getDescricao()); 
+			aux = aux.getNext();
+		}
+		return descricoes;
+	}
+	
 	@Override
 	public String toString() {
 		return "Curso: " + nome + "\n"
 				+ planosCurriculares.toString() + "\n";
+	}
+
+	@Override
+	public int compareTo(Curso o) {
+		return this.nome.compareTo(o.getNome());
 	}
 }

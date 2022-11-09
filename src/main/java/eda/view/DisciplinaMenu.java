@@ -1,10 +1,9 @@
 package eda.view;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import eda.controller.DisciplinaDao;
+import eda.estrutura.ListaLigadas;
 import eda.model.Disciplina;
 import eda.util.Componentes;
 
@@ -49,7 +48,8 @@ public class DisciplinaMenu {
 	}
 
 	public Disciplina selecionarDisciplina(String titulo) {
-		List<String> nomes = this.disciplinaDao.lista().stream().map(p -> p.getNome()).collect(Collectors.toList());
+		//List<String> nomes = this.disciplinaDao.lista().stream().map(p -> p.getNome()).collect(Collectors.toList());
+		ListaLigadas<String> nomes = this.disciplinaDao.nomes();
 		System.out.println("********** " + titulo + " **********\n" + Componentes.listaFormatada(nomes) + "0 - Voltar\n"
 				+ "Selecione uma disciplina: ");
 		int opcao = sc.nextInt();
@@ -63,7 +63,7 @@ public class DisciplinaMenu {
 		System.out.print("********** CRIAR DISCIPLINA **********\n" + "Nome: ");
 		String nome = sc.next();
 
-		if (this.disciplinaDao.pesquisar(nome) != null) {
+		if (this.disciplinaDao.pesquisar(nome)) {
 			System.out.println("Já existe uma disciplina com este nome");
 		} else {
 			Disciplina disciplina = new Disciplina();
@@ -153,7 +153,7 @@ public class DisciplinaMenu {
 
 	private void listaDeDisciplinas() {
 		try {
-			List<String> nomes = this.disciplinaDao.lista().stream().map(p -> p.getNome()).collect(Collectors.toList());
+			ListaLigadas<String> nomes = this.disciplinaDao.nomes();
 			System.out.println("********** LISTA DE DISCIPLINAS **********\n" + Componentes.listaFormatada(nomes)
 					+ "0 - Voltar\n" + "Selecione uma disciplina para visualizar os detalhes: ");
 			int opcao = sc.nextInt();

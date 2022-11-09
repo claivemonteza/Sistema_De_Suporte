@@ -1,12 +1,11 @@
 package eda.view;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import eda.controller.CursoDao;
 import eda.controller.DisciplinaDao;
 import eda.controller.PlanoCurricularDao;
+import eda.estrutura.ListaLigadas;
 import eda.model.Curso;
 import eda.model.PlanoCurricular;
 import eda.util.Componentes;
@@ -99,7 +98,7 @@ public class CursoMenu {
 
 	public void listaDeCursos() {
 		try {
-			List<String> nomes = this.cursoDao.lista().stream().map(p -> p.getNome()).collect(Collectors.toList());
+			ListaLigadas<String> nomes = this.cursoDao.nomes();
 			System.out.println("********** LISTA DE CURSOS **********\n" + Componentes.listaFormatada(nomes)
 					+ "0 - Voltar\n" + "Selecione a disciplina: ");
 			int opcao = sc.nextInt();
@@ -178,8 +177,7 @@ public class CursoMenu {
 
 	private void removerPlanoDoCurso(Curso curso) {
 		try {
-			List<String> nomes = curso.getPlanosCurriculares().stream().map(p -> p.getDescricao())
-					.collect(Collectors.toList());
+			ListaLigadas<String> nomes = curso.descricoesDoPlano();
 			System.out.println("********** REMOVER PLANO **********\n" + Componentes.listaFormatada(nomes)
 					+ "0 - Voltar\n" + "Selecione o plano: ");
 			int opcao = sc.nextInt();
@@ -195,7 +193,7 @@ public class CursoMenu {
 	}
 
 	public Curso selecionarCurso(String titulo) {
-		List<String> nomes = cursoDao.lista().stream().map(p -> p.getNome()).collect(Collectors.toList());
+		ListaLigadas<String> nomes = cursoDao.nomes();
 		System.out.println("********** " + titulo + " **********\n" + Componentes.listaFormatada(nomes) + "0 - Voltar\n"
 				+ "Selecione o curso: ");
 		int opcao = sc.nextInt();

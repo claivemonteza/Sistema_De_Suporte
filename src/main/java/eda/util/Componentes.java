@@ -1,21 +1,25 @@
 package eda.util;
 
-import java.util.List;
+import eda.estrutura.ListaLigadas;
+import eda.estrutura.Node;
 
 public class Componentes {
 
-	public static String listaFormatada(List<String> dados) {
+	public static String listaFormatada(ListaLigadas<String> dados) {
 		int i = 1;
 		String listaFormatada = "";
-		for (String d : dados) {
-			listaFormatada += String.valueOf(i).concat(" - ").concat(d + "\n");
+		Node<String> aux = dados.List();
+		
+		while(aux!=null) {
+			listaFormatada += String.valueOf(i).concat(" - ").concat(aux.getData() + "\n");
+			aux = aux.getNext();
 			i++;
 		}
 		return listaFormatada;
 	}
 	
-	public static void detalhes(int index, List<?> dados) {
-		Object obj = dados.get(index - 1);
+	public static void detalhes(int index, ListaLigadas<?> dados) {
+		Object obj = dados.get(index - 1).getData();
 		System.out.println(obj.toString());
 	}
 }

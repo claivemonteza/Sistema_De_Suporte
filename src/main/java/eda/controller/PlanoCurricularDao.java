@@ -1,13 +1,12 @@
 package eda.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import eda.estrutura.ListaLigadas;
+import eda.estrutura.Node;
 import eda.model.PlanoCurricular;
 
 public class PlanoCurricularDao implements GenericDAO<PlanoCurricular> {
 
-	private List<PlanoCurricular> planoCurriculares = new ArrayList<PlanoCurricular>();
+	private ListaLigadas<PlanoCurricular> planoCurriculares = new ListaLigadas<PlanoCurricular>();
 
 	@Override
 	public void gravar(PlanoCurricular t) {
@@ -24,22 +23,28 @@ public class PlanoCurricularDao implements GenericDAO<PlanoCurricular> {
 	}
 
 	@Override
-	public PlanoCurricular pesquisar(String str) {
-		for (PlanoCurricular p: this.planoCurriculares) {
-			if(p.getDescricao().toLowerCase().equals(str.toLowerCase())) {
-				return p;
-			}
-		}
-		return null;
+	public boolean pesquisar(String str) {
+		PlanoCurricular plano = new PlanoCurricular();
+		plano.setDescricao(str);
+		return this.planoCurriculares.exists(plano);	
 	}
 
 	public PlanoCurricular get(int index) {
-		return this.planoCurriculares.get(index-1);
+		return this.planoCurriculares.get(index-1).getData();
 	}
 	
 	@Override
-	public List<PlanoCurricular> lista() {
+	public ListaLigadas<PlanoCurricular> lista() {
 		return this.planoCurriculares;
 	}
 
+	public ListaLigadas<String> descricoes(){
+		ListaLigadas<String> descricoes = new ListaLigadas<String>();
+		Node<PlanoCurricular> aux = lista().List();
+		while(aux!=null) {
+			descricoes.add(aux.getData().getDescricao()); 
+			aux = aux.getNext();
+		}
+		return descricoes;
+	}
 }

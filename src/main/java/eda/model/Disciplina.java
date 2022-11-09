@@ -1,48 +1,55 @@
 package eda.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import eda.estrutura.ListaLigadas;
+import eda.estrutura.Node;
 
-public class Disciplina {
+public class Disciplina implements Comparable<Disciplina> {
 
 	private String nome;
-	private List<String> topicos = new ArrayList<>();
-	
+	private ListaLigadas<String> topicos = new ListaLigadas<String>();
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public List<String> getTopicos() {
+
+	public ListaLigadas<String> getTopicos() {
 		return topicos;
 	}
-	
-	public void setTopicos(List<String> topicos) {
+
+	public void setTopicos(ListaLigadas<String> topicos) {
 		this.topicos = topicos;
 	}
-	
+
 	public void adicionarTopico(String topico) {
 		this.topicos.add(topico);
 	}
-	
+
 	public void removerTopico(int index) {
-		this.topicos.remove(index-1);
+		this.topicos.remove(index - 1);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Disciplina: " + nome + "\n"
-				+ "            Topicos: \n"+topicos()+"\n";
+		return "Disciplina: " + nome + "\n" + "            Topicos: \n" + topicos() + "\n";
 	}
-	
+
 	private String topicos() {
 		String listaFormatada = "";
-		for (String topico : this.topicos) {
-			listaFormatada += "                   - ".concat(topico+"\n");
+		Node<String> aux = this.topicos.List();
+		while (aux != null) {
+			listaFormatada += "                   - ".concat(aux.getData() + "\n");
+			aux = aux.getNext();
 		}
 		return listaFormatada;
+
+	}
+
+	@Override
+	public int compareTo(Disciplina o) {
+		return this.nome.compareTo(o.getNome());
 	}
 }

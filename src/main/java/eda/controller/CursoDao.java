@@ -1,14 +1,13 @@
 package eda.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import eda.estrutura.ListaLigadas;
+import eda.estrutura.Node;
 import eda.model.Curso;
 import eda.model.PlanoCurricular;
 
 public class CursoDao implements GenericDAO<Curso> {
 
-	private List<Curso> cursos = new ArrayList<Curso>();
+	private ListaLigadas<Curso> cursos = new ListaLigadas<Curso>();
 	
 	@Override
 	public void gravar(Curso t) {
@@ -17,7 +16,7 @@ public class CursoDao implements GenericDAO<Curso> {
 
 	@Override
 	public void remover(int index) {
-		this.cursos.remove(index-1);
+		this.cursos.remove(index);
 	}
 
 	public void remover(Curso curso) {
@@ -25,28 +24,35 @@ public class CursoDao implements GenericDAO<Curso> {
 	}
 	
 	@Override
-	public Curso pesquisar(String str) {
-		for (Curso c: this.cursos) {
-			if(c.getNome().toLowerCase().equals(str.toLowerCase())) {
-				return c;
-			}
-		}
-		return null;
+	public boolean pesquisar(String str) {
+		Curso curso = new Curso();
+		curso.setNome(str);
+		return this.cursos.exists(curso);
 	}
 
 	
 	public Curso get(int index) {
-		return this.cursos.get(index-1);
+		return this.cursos.get(index).getData();
 	}
 	
 	@Override
-	public List<Curso> lista() {
+	public ListaLigadas<Curso> lista() {
 		return this.cursos;
 	}
 	
 	public void addPlanoCurricular(int index, PlanoCurricular p) {
 		Curso c = get(index);
 		c.getPlanosCurriculares().add(p);
+	}
+	
+	public ListaLigadas<String> nomes(){
+		ListaLigadas<String> nomes = new ListaLigadas<String>();
+		Node<Curso> aux = lista().List();
+		while(aux!=null) {
+			nomes.add(aux.getData().getNome()); 
+			aux = aux.getNext();
+		}
+		return nomes;
 	}
 
 }

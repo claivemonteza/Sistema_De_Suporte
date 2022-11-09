@@ -1,23 +1,35 @@
 package eda.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import eda.estrutura.ListaLigadas;
+import eda.estrutura.Node;
 
-public class PlanoCurricular {
+public class PlanoCurricular implements Comparable<PlanoCurricular>{
 
 	private String descricao;
-	private List<Disciplina> disciplinas = new ArrayList<>();
+	private ListaLigadas<Disciplina> disciplinas = new ListaLigadas<Disciplina>();
+	
 	public String getDescricao() {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public List<Disciplina> getDisciplinas() {
+	public ListaLigadas<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
-	public void setDisciplinas(List<Disciplina> disciplinas) {
+	
+	public void setDisciplinas(ListaLigadas<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
+	}
+	
+	public ListaLigadas<String> nomesDeDisciplinas(){
+		ListaLigadas<String> nomes = new ListaLigadas<String>();
+		Node<Disciplina> aux = disciplinas.List();
+		while(aux!=null) {
+			nomes.add(aux.getData().getNome()); 
+			aux = aux.getNext();
+		}
+		return nomes;
 	}
 	
 	public void adicionarDisciplina(Disciplina disciplina) {
@@ -32,6 +44,10 @@ public class PlanoCurricular {
 	public String toString() {
 		return "Plano curricular: " + descricao + "\n"
 				+ this.disciplinas.toString()+"\n";
+	}
+	@Override
+	public int compareTo(PlanoCurricular o) {
+		return this.descricao.compareTo(o.getDescricao());
 	}
 	
 }

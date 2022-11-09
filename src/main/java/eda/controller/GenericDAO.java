@@ -1,11 +1,11 @@
 package eda.controller;
 
-import java.util.List;
+import eda.estrutura.ListaLigadas;
 
 public interface GenericDAO<T> {
 
 	public void gravar(T t);
 	public void remover(int index);
-	public T pesquisar(String str);
-	public List<T> lista();
+	public boolean pesquisar(String str);
+	public ListaLigadas<?> lista();
 }
