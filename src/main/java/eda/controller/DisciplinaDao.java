@@ -4,7 +4,7 @@ import eda.estrutura.ListaLigadas;
 import eda.estrutura.Node;
 import eda.model.Disciplina;
 
-public class DisciplinaDao implements GenericDAO<Disciplina> {
+public class DisciplinaDao implements TAD<Disciplina> {
 	
 	private ListaLigadas<Disciplina> disciplinas = new ListaLigadas<Disciplina>();
 	
@@ -18,6 +18,7 @@ public class DisciplinaDao implements GenericDAO<Disciplina> {
 		this.disciplinas.remove(index-1);
 	}
 	
+	@Override
 	public void remover(Disciplina disciplina) {
 		this.disciplinas.remove(disciplina);
 	}

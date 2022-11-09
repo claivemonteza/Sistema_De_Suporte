@@ -4,7 +4,7 @@ import eda.estrutura.ListaLigadas;
 import eda.estrutura.Node;
 import eda.model.PlanoCurricular;
 
-public class PlanoCurricularDao implements GenericDAO<PlanoCurricular> {
+public class PlanoCurricularDao implements TAD<PlanoCurricular> {
 
 	private ListaLigadas<PlanoCurricular> planoCurriculares = new ListaLigadas<PlanoCurricular>();
 
@@ -18,6 +18,7 @@ public class PlanoCurricularDao implements GenericDAO<PlanoCurricular> {
 		this.planoCurriculares.remove(index-1);
 	}
 	
+	@Override
 	public void remover(PlanoCurricular t) {
 		this.planoCurriculares.remove(t);
 	}
